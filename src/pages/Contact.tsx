@@ -59,8 +59,11 @@ const Contact = () => {
           service: formData.get("service"),
           message: formData.get("message"),
           _subject: "New quote request from D&C Contracting website",
+          _replyto: formData.get("email"),
           _template: "table",
           _captcha: "false",
+          _autoresponse:
+            "Thanks for reaching out to D&C Contracting! We've received your request and will get back to you shortly — usually the same day. For anything urgent, call us at 716-863-4913.\n\n— Dylan & Connor, D&C Contracting\nCome home to quality!",
         }),
       });
 
