@@ -10,6 +10,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { toast } from "@/hooks/use-toast";
+import { Mail, Phone, MapPin, Clock, Facebook } from "lucide-react";
 
 const faqs = [
   {
@@ -33,6 +34,10 @@ const faqs = [
     a: "Yes, D&C Contracting is fully licensed and insured for your peace of mind.",
   },
 ];
+
+const focusClass =
+  "focus-visible:ring-2 focus-visible:ring-amber-400/50 focus-visible:border-amber-400 focus-visible:ring-offset-0 transition-colors duration-200";
+const fieldClass = `h-11 ${focusClass}`;
 
 const Contact = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -87,57 +92,79 @@ const Contact = () => {
                   Today
                 </h2>
 
-                <div className="space-y-8">
-                  <div>
-                    <h3 className="text-minimal text-muted-foreground mb-2">EMAIL</h3>
-                    <a
-                      href="mailto:dylanszal9912@gmail.com"
-                      className="text-xl hover:text-muted-foreground transition-colors duration-300"
-                    >
-                      dylanszal9912@gmail.com
-                    </a>
-                  </div>
-
-                  <div>
-                    <h3 className="text-minimal text-muted-foreground mb-2">PHONE</h3>
-                    <div className="space-y-1">
+                <div className="rounded-xl border border-border divide-y divide-border">
+                  <div className="flex items-start gap-4 p-5">
+                    <Mail className="h-5 w-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
+                    <div className="min-w-0">
+                      <h3 className="text-minimal text-muted-foreground mb-1">EMAIL</h3>
                       <a
-                        href="tel:+17168634913"
-                        className="block text-xl hover:text-muted-foreground transition-colors duration-300"
+                        href="mailto:dylanszal9912@gmail.com"
+                        className="text-base md:text-lg break-all hover:text-amber-600 dark:hover:text-amber-400 transition-colors duration-300"
                       >
-                        716-863-4913
-                      </a>
-                      <a
-                        href="tel:+17169081800"
-                        className="block text-xl hover:text-muted-foreground transition-colors duration-300"
-                      >
-                        716-908-1800
+                        dylanszal9912@gmail.com
                       </a>
                     </div>
                   </div>
 
-                  <div>
-                    <h3 className="text-minimal text-muted-foreground mb-2">SERVICE AREA</h3>
-                    <address className="text-xl not-italic">
-                      WNY · Buffalo WNY · Buffalo WNY · Buffalo, NY · United States Niagara Falls, NY Niagara Falls, NY
-                    </address>
+                  <div className="flex items-start gap-4 p-5">
+                    <Phone className="h-5 w-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
+                    <div>
+                      <h3 className="text-minimal text-muted-foreground mb-1">PHONE</h3>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5">
+                        <a
+                          href="tel:+17168634913"
+                          className="text-base md:text-lg hover:text-amber-600 dark:hover:text-amber-400 transition-colors duration-300"
+                        >
+                          716-863-4913
+                        </a>
+                        <span className="text-border">·</span>
+                        <a
+                          href="tel:+17169081800"
+                          className="text-base md:text-lg hover:text-amber-600 dark:hover:text-amber-400 transition-colors duration-300"
+                        >
+                          716-908-1800
+                        </a>
+                      </div>
+                    </div>
                   </div>
 
-                  <div>
-                    <h3 className="text-minimal text-muted-foreground mb-2">HOURS</h3>
-                    <p className="text-xl">Always open</p>
+                  <div className="flex items-start gap-4 p-5">
+                    <MapPin className="h-5 w-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
+                    <div>
+                      <h3 className="text-minimal text-muted-foreground mb-1">SERVICE AREA</h3>
+                      <address className="not-italic text-base md:text-lg leading-relaxed">
+                        Buffalo, NY &amp; all of Western New York
+                        <span className="block text-muted-foreground text-sm md:text-base">
+                          Niagara Falls &amp; surrounding communities
+                        </span>
+                      </address>
+                    </div>
                   </div>
 
-                  <div>
-                    <h3 className="text-minimal text-muted-foreground mb-6">FOLLOW US</h3>
-                    <a
-                      href="https://www.facebook.com/profile.php?id=61589264420672"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block text-xl hover:text-muted-foreground transition-colors duration-300"
-                    >
-                      Facebook
-                    </a>
+                  <div className="flex items-start gap-4 p-5">
+                    <Clock className="h-5 w-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
+                    <div>
+                      <h3 className="text-minimal text-muted-foreground mb-1">HOURS</h3>
+                      <p className="text-base md:text-lg">
+                        Always open
+                        <span className="text-muted-foreground text-sm"> · 24/7 availability</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 p-5">
+                    <Facebook className="h-5 w-5 text-amber-500 dark:text-amber-400 shrink-0 mt-0.5" />
+                    <div>
+                      <h3 className="text-minimal text-muted-foreground mb-1">FOLLOW US</h3>
+                      <a
+                        href="https://www.facebook.com/profile.php?id=61589264420672"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-base md:text-lg hover:text-amber-600 dark:hover:text-amber-400 transition-colors duration-300"
+                      >
+                        Facebook
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -147,16 +174,29 @@ const Contact = () => {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
-                    <Input id="name" name="name" required maxLength={100} />
+                    <Input id="name" name="name" required maxLength={100} className={fieldClass} />
                   </div>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input id="email" name="email" type="email" required maxLength={255} />
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                        maxLength={255}
+                        className={fieldClass}
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone</Label>
-                      <Input id="phone" name="phone" type="tel" maxLength={30} />
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        maxLength={30}
+                        className={fieldClass}
+                      />
                     </div>
                   </div>
                   <div className="space-y-2">
@@ -166,11 +206,19 @@ const Contact = () => {
                       name="service"
                       placeholder="Concrete, basement remodel, etc."
                       maxLength={120}
+                      className={fieldClass}
                     />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="message">Project details</Label>
-                    <Textarea id="message" name="message" rows={5} required maxLength={2000} />
+                    <Textarea
+                      id="message"
+                      name="message"
+                      rows={5}
+                      required
+                      maxLength={2000}
+                      className={`${focusClass} resize-none`}
+                    />
                   </div>
                   <Button type="submit" disabled={submitting} className="w-full">
                     {submitting ? "Sending..." : "Send Message"}

@@ -20,7 +20,8 @@ const Blog = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto">
             <div className="mb-12">
-              <h1 className="text-6xl md:text-8xl font-light text-architectural mb-8">
+              <p className="text-minimal text-muted-foreground mb-4">ARTICLES</p>
+              <h1 className="text-4xl md:text-6xl font-light text-architectural mb-12">
                 INSIGHTS
               </h1>
               <p className="text-xl text-muted-foreground max-w-3xl">

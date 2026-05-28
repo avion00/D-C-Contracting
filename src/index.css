@@ -116,11 +116,12 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
   }
-  
+
   /* Architectural Typography */
   .text-architectural {
-    @apply tracking-[-0.02em] leading-[1.1];
+    @apply font-display tracking-[-0.02em] leading-[1.1];
   }
   
   .text-minimal {
@@ -147,5 +148,17 @@
     to {
       @apply opacity-100 translate-y-0;
     }
+  }
+
+  /* Hero scroll line animation */
+  .hero-scroll-line {
+    animation: heroScroll 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes heroScroll {
+    0%   { transform: translateY(-100%); opacity: 1; }
+    60%  { transform: translateY(260%);  opacity: 1; }
+    61%  { transform: translateY(260%);  opacity: 0; }
+    100% { transform: translateY(-100%); opacity: 0; }
   }
 }

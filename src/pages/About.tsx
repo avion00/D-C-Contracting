@@ -199,7 +199,7 @@ const About = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center">
             <h3 className="text-minimal text-primary-foreground/60 mb-4">GET IN TOUCH</h3>
-            <h4 className="text-4xl md:text-6xl font-light mb-10">
+            <h4 className="text-4xl md:text-6xl font-light text-architectural mb-10">
               Ready to start your project?
             </h4>
             <p className="text-lg text-primary-foreground/80 mb-12 max-w-2xl mx-auto leading-relaxed">
