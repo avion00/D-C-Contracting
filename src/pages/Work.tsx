@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { ChevronLeft, ChevronRight, MapPin, Maximize2 } from "lucide-react";
 import { categories, categoryGroups, type CategoryGroup } from "@/data/projects";
+import Lightbox from "@/components/Lightbox";
 
-const ProjectCard = ({ group }: { group: CategoryGroup }) => {
+const ProjectCard = ({
+  group,
+  onOpen,
+}: {
+  group: CategoryGroup;
+  onOpen: (index: number) => void;
+}) => {
   const [current, setCurrent] = useState(0);
   const items = group.items;
   const count = items.length;
@@ -13,7 +20,10 @@ const ProjectCard = ({ group }: { group: CategoryGroup }) => {
 
   return (
     <div className="group flex flex-col">
-      <div className="relative overflow-hidden rounded-2xl bg-muted aspect-[4/3] shadow-[0_24px_60px_-30px_rgba(0,0,0,0.35)]">
+      <div
+        onClick={() => onOpen(current)}
+        className="relative overflow-hidden rounded-2xl bg-muted aspect-[4/3] cursor-zoom-in shadow-[0_24px_60px_-30px_rgba(0,0,0,0.35)]"
+      >
         {item.video ? (
           <video
             key={current}
@@ -24,6 +34,7 @@ const ProjectCard = ({ group }: { group: CategoryGroup }) => {
             loop
             playsInline
             controls
+            onClick={(e) => e.stopPropagation()}
             className="absolute inset-0 w-full h-full object-cover bg-black animate-in fade-in duration-500"
           />
         ) : (
@@ -37,6 +48,19 @@ const ProjectCard = ({ group }: { group: CategoryGroup }) => {
 
         {/* Hover veil */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 pointer-events-none" />
+
+        {/* View full hint */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpen(current);
+          }}
+          aria-label="View full screen"
+          className="absolute bottom-5 right-5 z-20 inline-flex items-center gap-2 bg-background/90 backdrop-blur-md px-4 py-2.5 shadow-sm text-foreground hover:bg-amber-500 hover:text-black dark:hover:bg-amber-400 transition-all duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100"
+        >
+          <Maximize2 className="h-3.5 w-3.5" />
+          <span className="text-[10px] tracking-[0.18em] uppercase font-bold">View Full</span>
+        </button>
 
         {/* Category badge */}
         <div className="absolute top-5 left-5 z-20 inline-flex items-center gap-2 bg-background/90 backdrop-blur-md px-4 py-2 shadow-sm">
@@ -57,14 +81,20 @@ const ProjectCard = ({ group }: { group: CategoryGroup }) => {
         {count > 1 && (
           <>
             <button
-              onClick={prev}
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
               aria-label="Previous image"
               className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-background/80 backdrop-blur-md text-foreground shadow-lg hover:bg-amber-500 dark:hover:bg-amber-400 hover:text-black hover:scale-110 transition-all duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
             <button
-              onClick={next}
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
               aria-label="Next image"
               className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full bg-background/80 backdrop-blur-md text-foreground shadow-lg hover:bg-amber-500 dark:hover:bg-amber-400 hover:text-black hover:scale-110 transition-all duration-300 opacity-100 md:opacity-0 md:group-hover:opacity-100"
             >
@@ -124,6 +154,7 @@ const ProjectCard = ({ group }: { group: CategoryGroup }) => {
 
 const Work = () => {
   const [activeCategory, setActiveCategory] = useState("ALL");
+  const [lightbox, setLightbox] = useState<{ group: CategoryGroup; index: number } | null>(null);
 
   const visibleGroups =
     activeCategory === "ALL"
@@ -183,12 +214,24 @@ const Work = () => {
               }`}
             >
               {visibleGroups.map((group) => (
-                <ProjectCard key={group.category} group={group} />
+                <ProjectCard
+                  key={group.category}
+                  group={group}
+                  onOpen={(index) => setLightbox({ group, index })}
+                />
               ))}
             </div>
           </div>
         </div>
       </section>
+
+      {lightbox && (
+        <Lightbox
+          group={lightbox.group}
+          startIndex={lightbox.index}
+          onClose={() => setLightbox(null)}
+        />
+      )}
     </div>
   );
 };
